@@ -16,8 +16,8 @@ use App\Http\Controllers\IController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('auth.login');
+})->middleware(['auth', 'verified'])->name('login');;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
