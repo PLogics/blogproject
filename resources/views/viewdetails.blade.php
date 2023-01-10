@@ -30,7 +30,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                             </svg>
-                            <p>{{ Auth::User()->name }} {{ $row['created_at'] }}</p>
+                            <p>{{ $row['created_at'] }}</p>
                         </span>
                         
                         <img class="w-50 rounded-s" src="{{ $row['image'] }}" alt="..." />
@@ -60,8 +60,12 @@
                                                 class="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 focus:outline-none dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
                                                 placeholder="Write a comment..." required name="comment"></textarea>
                                         </div>
-                                        <input type="hidden" name="user_id" value="{{Auth::User()->id}}"/>
+                                        @auth
+                                        <input type="hidden" name="user_name" value="{{Auth::User()->name}}"/>
                                         <input type="hidden" name="post_id" value="{{$row['id']}}"/>
+                                        {{-- @else
+                                        User --}}
+                                        @endauth
                                         <input class="btn btn-primary" type="submit" value="Post Comment" name="save"/> 
                                     </form>
                                     
@@ -71,9 +75,11 @@
                                         <footer class="flex justify-between items-center mb-2">
                                             <div class="flex items-center">
                                                 <p class="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                                                       
                                                     <img class="mr-2 w-6 h-6 rounded-full"
                                                         src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                                                        alt="....">{{ Auth::User()->name }}</p>
+                                                        alt="....">{{ $row['comm'][$id]['username']}}</p>
+                                                        
                                                 <p class="text-sm text-gray-600 dark:text-gray-400"><time pubdate
                                                         datetime="2022-02-08" title="February 8th, 2022">
                                                         {{ date('D.d.M.Y H:m:s',strtotime($row['comm'][$id]['created_at']) )}}</time></p>

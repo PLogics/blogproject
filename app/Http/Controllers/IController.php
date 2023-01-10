@@ -37,7 +37,7 @@ class IController extends Controller
         if($request->isMethod('post'))
         {
             $add->comment = $request->get('comment');
-            $add->user_id = $request->get('user_id');
+            $add->username = $request->get('user_name');
             $add->post_id = $request->get('post_id');
 
             $add->save();

@@ -15,9 +15,15 @@ use App\Http\Controllers\IController;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
-})->middleware(['auth', 'verified'])->name('login');;
+// Route::get('/', function () {
+//     return view('auth.login');
+// })->middleware(['auth', 'verified'])->name('login');
+
+// Route::get('/', function () {
+//     return view('auth.login');
+// })->middleware(['auth', 'verified'])->name('login');
+
+Route::get('/', [IController::class,'post_view']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -38,7 +44,7 @@ Route::get('/postview',[IController::class,'post_view']);
 Route::get('/viewdetails/{id}',[IController::class,'view_details']);
 
 //addcomment//
-Route::post('/addcomment',[IController::class,'add_comment']);
+Route::post('/addcomment',[IController::class,'add_comment'])->middleware(['auth', 'verified'])->name('add_comment');
 Route::get('/viewdetails',[IController::class,'view']);
 
 //Category display//
